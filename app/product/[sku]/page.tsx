@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ProductDetailView } from "@/components/product/product-detail-view";
+import { buttonStyles } from "@/components/ui/button";
 import { getProductBySku } from "@/lib/dummyjson/client";
 
 type ProductPageProps = {
@@ -25,7 +26,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
           Podés volver al listado o probar con otro término de búsqueda.
         </p>
         <Link
-          className="mt-2 rounded-full bg-bidcom-blue px-5 py-3 text-sm font-bold text-surface transition hover:bg-bidcom-blue-ink focus:outline-none focus:ring-4 focus:ring-bidcom-blue-soft"
+          className={buttonStyles({ className: "mt-2 px-5 py-3" })}
           href="/"
         >
           Volver al inicio
@@ -37,7 +38,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-6 sm:px-6 lg:py-10">
       <Link
-        className="w-fit rounded-full border border-border-soft bg-surface px-4 py-2 text-sm font-bold text-bidcom-blue transition hover:border-bidcom-blue focus:outline-none focus:ring-4 focus:ring-bidcom-blue-soft"
+        className={buttonStyles({ className: "w-fit", variant: "secondary" })}
         href="/"
       >
         Volver al listado

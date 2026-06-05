@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@base-ui/react/button";
-import { Input } from "@base-ui/react/input";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FormEvent } from "react";
+import { Button } from "@/components/ui/button";
+import { TextInput } from "@/components/ui/text-input";
 
 export function SearchForm() {
   const router = useRouter();
@@ -48,21 +48,16 @@ export function SearchForm() {
             strokeWidth="2"
           />
         </svg>
-        <Input
+        <TextInput
           aria-label="Término de búsqueda"
-          className="min-h-12 w-full rounded-full border border-border-soft bg-surface py-3 pl-10 pr-4 text-sm font-medium text-foreground shadow-sm outline-none transition placeholder:text-zinc-500 focus:border-bidcom-blue focus:ring-4 focus:ring-bidcom-blue-soft"
+          className="pl-10"
           defaultValue={searchTerm}
           key={searchTerm}
           name="s"
           placeholder="¿Qué estás buscando?"
         />
       </div>
-      <Button
-        className="min-h-12 rounded-full bg-bidcom-blue px-6 text-sm font-bold text-surface shadow-sm transition hover:bg-bidcom-blue-ink focus:outline-none focus:ring-4 focus:ring-bidcom-blue-soft active:translate-y-px"
-        type="submit"
-      >
-        Buscar
-      </Button>
+      <Button type="submit">Buscar</Button>
     </form>
   );
 }

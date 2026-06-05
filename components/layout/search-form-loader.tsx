@@ -1,8 +1,8 @@
 "use client";
 
-import { Button } from "@base-ui/react/button";
-import { Input } from "@base-ui/react/input";
 import dynamic from "next/dynamic";
+import { Button } from "@/components/ui/button";
+import { TextInput } from "@/components/ui/text-input";
 
 // Usamos Dynamic para cargar el componente de forma diferida, evitando un mismatch de hidratación.
 const SearchForm = dynamic(
@@ -38,19 +38,15 @@ function SearchFormFallback() {
             strokeWidth="2"
           />
         </svg>
-        <Input
+        <TextInput
           aria-label="Término de búsqueda"
-          className="min-h-12 w-full rounded-full border border-border-soft bg-surface py-3 pl-10 pr-4 text-sm font-medium text-foreground shadow-sm outline-none"
+          className="pl-10"
           disabled
           name="s"
           placeholder="¿Qué estás buscando?"
         />
       </div>
-      <Button
-        className="min-h-12 rounded-full bg-bidcom-blue px-6 text-sm font-bold text-surface shadow-sm"
-        disabled
-        type="submit"
-      >
+      <Button disabled type="submit">
         Buscar
       </Button>
     </form>

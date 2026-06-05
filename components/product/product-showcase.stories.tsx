@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import type { DummyJsonCategory, DummyJsonProduct } from "@/lib/dummyjson/types";
+import type {
+  DummyJsonCategory,
+  DummyJsonProduct,
+} from "@/lib/dummyjson/types";
 import { EmptyProductsState } from "./empty-products-state";
 import { ProductDetailView } from "./product-detail-view";
 import { ProductGrid } from "./product-grid";

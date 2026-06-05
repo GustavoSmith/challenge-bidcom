@@ -1,5 +1,6 @@
 import { DummyJsonCategory } from "@/lib/dummyjson/types";
 import Link from "next/link";
+import { buttonStyles } from "@/components/ui/button";
 
 type EmptyProductsStateProps = {
   categories: DummyJsonCategory[];
@@ -20,7 +21,7 @@ export function EmptyProductsState({ categories }: EmptyProductsStateProps) {
 
           return (
             <Link
-              className="rounded-full border border-border-soft bg-bidcom-blue-soft px-4 py-2 text-sm font-bold text-bidcom-blue-ink transition hover:border-bidcom-blue hover:bg-surface focus:outline-none focus:ring-4 focus:ring-bidcom-blue-soft"
+              className={buttonStyles({ variant: "category" })}
               href={href}
               key={category.slug}
             >
