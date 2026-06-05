@@ -17,7 +17,6 @@ export function SiteHeader() {
             alt="Bidcom"
             width={118}
             height={48}
-            className="h-auto w-[118px]"
             priority
           />
         </Link>
