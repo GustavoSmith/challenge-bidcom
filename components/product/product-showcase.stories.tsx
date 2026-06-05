@@ -3,6 +3,7 @@ import type {
   DummyJsonCategory,
   DummyJsonProduct,
 } from "@/lib/dummyjson/types";
+import ProductLoading from "@/app/product/[sku]/loading";
 import { EmptyProductsState } from "./empty-products-state";
 import { ProductDetailView } from "./product-detail-view";
 import { ProductGrid } from "./product-grid";
@@ -103,4 +104,11 @@ export const EmptyResults: Story = {
 
 export const ProductDetail: Story = {
   render: () => <ProductDetailView product={products[0]} />,
+};
+
+export const ProductDetailLoading: Story = {
+  parameters: {
+    layout: "fullscreen",
+  },
+  render: () => <ProductLoading />,
 };
