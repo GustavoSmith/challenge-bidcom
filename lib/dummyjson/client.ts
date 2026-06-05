@@ -1,24 +1,15 @@
-import {
-  mapCategory,
-  mapProductDetail,
-  mapProductSummary,
-  mapSkuIndexEntry,
-} from "./mappers";
 import type {
   DummyJsonCategory,
   DummyJsonProduct,
   DummyJsonProductsResponse,
-  ProductCategory,
-  ProductDetail,
   ProductSearchResult,
-  ProductSkuIndexEntry,
 } from "./types";
 
 const DUMMYJSON_BASE_URL = "https://dummyjson.com";
 const DEFAULT_REVALIDATE_SECONDS = 300;
 const DEFAULT_PRODUCT_LIMIT = 20;
 
-type NextFetchInit = RequestInit & {
+type NextFetchInit = NonNullable<Parameters<typeof fetch>[1]> & {
   next?: {
     revalidate?: number;
   };
@@ -61,7 +52,7 @@ export async function searchProducts(
   );
 
   return {
-    products: data.products.map(mapProductSummary),
+    products: data.products,
     total: data.total,
     skip: data.skip,
     limit: data.limit,
@@ -69,37 +60,36 @@ export async function searchProducts(
   };
 }
 
-export async function getCategories(limit = 5): Promise<ProductCategory[]> {
+export async function getCategories(limit = 5): Promise<DummyJsonCategory[]> {
   const categories = await fetchJson<DummyJsonCategory[]>(
     "/products/categories",
   );
 
-  return categories.slice(0, limit).map(mapCategory);
+  return categories.slice(0, limit);
 }
 
+// Como no existe un endpoint para obtener el id por sku, se obtiene el índice de productos y se busca el id del producto que coincide con el sku.
 export async function getProductIdBySku(
   sku: string,
 ): Promise<number | undefined> {
-  const data = await fetchJson<DummyJsonProductsResponse<ProductSkuIndexEntry>>(
-    "/products?limit=0&select=sku",
-  );
+  const data = await fetchJson<
+    DummyJsonProductsResponse<Pick<DummyJsonProduct, "id" | "sku">>
+  >("/products?limit=0&select=sku");
   const normalizedSku = sku.trim();
-  const match = data.products.map(mapSkuIndexEntry).find((product) => {
+  const match = data.products.find((product) => {
     return product.sku === normalizedSku;
   });
 
   return match?.id;
 }
 
-export async function getProductById(id: number): Promise<ProductDetail> {
-  const product = await fetchJson<DummyJsonProduct>(`/products/${id}`);
-
-  return mapProductDetail(product);
+export async function getProductById(id: number): Promise<DummyJsonProduct> {
+  return fetchJson<DummyJsonProduct>(`/products/${id}`);
 }
 
 export async function getProductBySku(
   sku: string,
-): Promise<ProductDetail | undefined> {
+): Promise<DummyJsonProduct | undefined> {
   const id = await getProductIdBySku(sku);
 
   if (!id) {

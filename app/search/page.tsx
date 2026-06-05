@@ -1,6 +1,6 @@
 import { EmptyProductsState } from "@/components/product/empty-products-state";
 import { ProductGrid } from "@/components/product/product-grid";
-import { getCategories, searchProducts } from "@/lib/dummyjson";
+import { getCategories, searchProducts } from "@/lib/dummyjson/client";
 
 type SearchPageProps = {
   searchParams: Promise<{
@@ -23,19 +23,14 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   const categories = result.products.length === 0 ? await getCategories(5) : [];
 
   return (
-    <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8 sm:px-6 lg:py-10">
-      <header className="flex flex-col gap-2">
-        <p className="text-sm font-semibold uppercase tracking-wide text-zinc-500">
+    <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-6 sm:px-6 lg:py-10">
+      <header className="rounded-[2rem] border border-border-soft bg-surface p-6 shadow-sm sm:p-8">
+        <p className="text-sm font-black uppercase tracking-[0.1em] text-bidcom-blue">
           Resultados de búsqueda
         </p>
-        <h1 className="text-3xl font-black tracking-tight text-zinc-950">
+        <h1 className="mt-2 text-3xl font-black tracking-tight text-foreground sm:text-4xl">
           {searchTerm ? `Resultados para "${searchTerm}"` : "Buscar productos"}
         </h1>
-        <p className="text-sm text-zinc-600">
-          {result.products.length > 0
-            ? `Mostrando ${result.products.length} de ${result.total} productos.`
-            : "Probá con otro término o elegí una categoría recomendada."}
-        </p>
       </header>
 
       {result.products.length > 0 ? (

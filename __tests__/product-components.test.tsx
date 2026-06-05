@@ -23,8 +23,9 @@ describe("product components", () => {
           id: 1,
           sku: "SKU-1",
           title: "Phone Max",
+          description: "A solid phone",
           price: 100,
-          image: "https://cdn.dummyjson.com/product-images/phone.png",
+          thumbnail: "https://cdn.dummyjson.com/product-images/phone.png",
           category: "smartphones",
           brand: "Acme",
         }}
@@ -44,8 +45,16 @@ describe("product components", () => {
     render(
       <EmptyProductsState
         categories={[
-          { slug: "beauty", name: "Beauty" },
-          { slug: "smartphones", name: "Smartphones" },
+          {
+            slug: "beauty",
+            name: "Beauty",
+            url: "https://dummyjson.com/products/category/beauty",
+          },
+          {
+            slug: "smartphones",
+            name: "Smartphones",
+            url: "https://dummyjson.com/products/category/smartphones",
+          },
         ]}
       />,
     );

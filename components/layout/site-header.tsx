@@ -1,17 +1,25 @@
 import Link from "next/link";
-import { SearchFormLoader } from "./search-form-loader";
 import Image from "next/image";
 import bidcomLogo from "@/app/logo_bidcom.svg";
+import { SearchFormLoader } from "./search-form-loader";
+
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-10 border-b border-zinc-200 bg-black">
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 py-4 sm:px-6 md:flex-row md:items-center md:justify-between">
+    <header className="sticky top-0 z-20 border-b border-border-soft bg-surface/95 shadow-sm backdrop-blur">
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 py-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between">
         <Link
-          aria-label="Ir a la página principal de Bidcom"
-          className="inline-flex w-fit items-center rounded-md text-2xl font-black tracking-tight text-zinc-950"
+          aria-label="Ir a la página principal"
+          className="inline-flex w-fit items-center rounded-2xl bg-bidcom-blue px-4 py-3 outline-none transition hover:bg-bidcom-blue-ink focus-visible:ring-4 focus-visible:ring-bidcom-blue-soft"
           href="/"
         >
-          <Image src={bidcomLogo} alt="Bidcom" width={100} height={100} />
+          <Image
+            src={bidcomLogo}
+            alt="Bidcom"
+            width={118}
+            height={48}
+            className="h-auto w-[118px]"
+            priority
+          />
         </Link>
         <SearchFormLoader />
       </div>

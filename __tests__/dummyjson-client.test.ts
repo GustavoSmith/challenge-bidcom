@@ -3,7 +3,7 @@ import {
   getCategories,
   getProductBySku,
   searchProducts,
-} from "@/lib/dummyjson";
+} from "@/lib/dummyjson/client";
 
 function mockFetchJson(...payloads: unknown[]) {
   const fetchMock = vi.fn();
@@ -51,11 +51,11 @@ describe("DummyJSON client", () => {
     expect(result.products[0]).toMatchObject({
       sku: "ABC-1",
       title: "Phone",
-      image: "https://example.com/phone.png",
+      thumbnail: "https://example.com/phone.png",
     });
   });
 
-  it("returns the first five mapped categories", async () => {
+  it("returns the first categories without remapping the API shape", async () => {
     mockFetchJson([
       { slug: "beauty", name: "Beauty", url: "https://example.com/beauty" },
       {
@@ -66,7 +66,7 @@ describe("DummyJSON client", () => {
     ]);
 
     await expect(getCategories(1)).resolves.toEqual([
-      { slug: "beauty", name: "Beauty" },
+      { slug: "beauty", name: "Beauty", url: "https://example.com/beauty" },
     ]);
   });
 

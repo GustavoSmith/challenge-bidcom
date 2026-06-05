@@ -10,9 +10,24 @@ export type DummyJsonProduct = {
   tags?: string[];
   brand?: string;
   sku: string;
+  weight?: number;
+  dimensions?: {
+    width: number;
+    height: number;
+    depth: number;
+  };
   warrantyInformation?: string;
   shippingInformation?: string;
   availabilityStatus?: string;
+  returnPolicy?: string;
+  minimumOrderQuantity?: number;
+  reviews?: unknown[];
+  meta?: {
+    createdAt: string;
+    updatedAt: string;
+    barcode: string;
+    qrCode: string;
+  };
   thumbnail: string;
   images?: string[];
 };
@@ -30,42 +45,6 @@ export type DummyJsonCategory = {
   url: string;
 };
 
-export type ProductSummary = {
-  id: number;
-  sku: string;
-  title: string;
-  price: number;
-  image: string;
-  category: string;
-  brand?: string;
-};
-
-export type ProductDetail = ProductSummary & {
-  description: string;
-  discountPercentage?: number;
-  rating?: number;
-  stock?: number;
-  tags: string[];
-  warrantyInformation?: string;
-  shippingInformation?: string;
-  availabilityStatus?: string;
-  images: string[];
-};
-
-export type ProductSearchResult = {
-  products: ProductSummary[];
-  total: number;
-  skip: number;
-  limit: number;
+export type ProductSearchResult = DummyJsonProductsResponse & {
   query: string;
-};
-
-export type ProductCategory = {
-  slug: string;
-  name: string;
-};
-
-export type ProductSkuIndexEntry = {
-  id: number;
-  sku: string;
 };
